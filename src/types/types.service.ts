@@ -37,7 +37,7 @@ export interface BookingDetailsProps {
   note: string;
   status: string;
   createdAt: string;
-
+customerId : string;
   service: {
     id: string;
     title: string;

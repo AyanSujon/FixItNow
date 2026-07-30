@@ -1,8 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
-
-// import { getAllBookings } from "@/services/actions/getAllBookings";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -13,10 +11,15 @@ import { getMe } from "@/services/getMe";
 export default async function MyBookings() {
   const result = await getAllBookings();
   const user =await getMe();
-  const id = user.data.profile.id; 
-  console.log(id)
 
-  const bookings = result?.data || [];
+const customerId = user.data.profile.id;
+
+  // const bookings = result?.data || [];
+const bookings =
+  result?.data.filter(
+    (booking: BookingDetailsProps) =>
+      booking.customerId !== customerId
+  ) || [];
 
   if (!bookings.length) {
     return (
@@ -30,7 +33,7 @@ export default async function MyBookings() {
             </p>
 
             <Button asChild>
-              <Link href="/browse-services">
+              <Link href="/services">
                 Browse Services
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
