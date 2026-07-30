@@ -18,7 +18,7 @@ const customerId = user.data.profile.id;
 const bookings =
   result?.data.filter(
     (booking: BookingDetailsProps) =>
-      booking.customerId !== customerId
+      booking.customerId === customerId
   ) || [];
 
   if (!bookings.length) {
