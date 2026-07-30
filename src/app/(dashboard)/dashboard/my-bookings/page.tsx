@@ -1,32 +1,53 @@
+
+
 import Link from "next/link";
 import Image from "next/image";
-import { Calendar, Clock, ArrowRight } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
+
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+
 import { getAllBookings } from "../../_actions/getAllBookings";
-import { BookingDetailsProps } from "@/types/types.service";
 import { getMe } from "@/services/getMe";
+import { BookingDetailsProps } from "@/types/types.service";
+import { bookingStatusConfig, paymentStatusConfig } from "./config/bookingStatusConfig";
 
 export default async function MyBookings() {
   const result = await getAllBookings();
-  const user =await getMe();
+  const user = await getMe();
 
-const customerId = user.data.profile.id;
+  const customerId = user.data.profile.id;
 
-  // const bookings = result?.data || [];
-const bookings =
-  result?.data.filter(
-    (booking: BookingDetailsProps) =>
-      booking.customerId === customerId
-  ) || [];
+  const bookings =
+    result?.data.filter(
+      (booking: BookingDetailsProps) =>
+        booking.customerId === customerId
+    ) || [];
 
   if (!bookings.length) {
     return (
       <div className="container mx-auto py-16">
-        <Card className="max-w-xl mx-auto">
-          <CardContent className="py-12 text-center space-y-4">
-            <h2 className="text-2xl font-bold">No Bookings Found</h2>
+        <Card className="mx-auto max-w-xl">
+          <CardContent className="space-y-4 py-12 text-center">
+            <h2 className="text-2xl font-bold">
+              No Bookings Found
+            </h2>
 
             <p className="text-muted-foreground">
               You haven't booked any services yet.
@@ -35,7 +56,6 @@ const bookings =
             <Button asChild>
               <Link href="/services">
                 Browse Services
-                <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
           </CardContent>
@@ -46,79 +66,199 @@ const bookings =
 
   return (
     <div className="container mx-auto py-8">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold">My Bookings</h1>
-        <p className="text-muted-foreground">
-          Manage all your booked services.
-        </p>
-      </div>
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-3xl">
+            My Bookings
+          </CardTitle>
 
-      <div className="grid gap-6">
-        {bookings.map((booking: BookingDetailsProps) => (
-          <Card key={booking.id}>
-            <CardContent className="p-6">
-              <div className="flex flex-col md:flex-row gap-6">
-                <Image
-                  src={booking.service.thumbnail}
-                  alt={booking.service.title}
-                  width={160}
-                  height={120}
-                  className="rounded-lg object-cover h-32 w-full md:w-44"
-                />
+          <CardDescription>
+            Manage all your booked services.
+          </CardDescription>
+        </CardHeader>
 
-                <div className="flex-1 space-y-3">
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <h2 className="text-xl font-semibold">
-                        {booking.service.title}
-                      </h2>
+        <CardContent>
+          <div className="overflow-x-auto rounded-lg border">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Service</TableHead>
+                  <TableHead>Date</TableHead>
+                  <TableHead>Status</TableHead>
+                  <TableHead>Payment</TableHead>
+                  <TableHead>Price</TableHead>
+                  <TableHead>Duration</TableHead>
+                  <TableHead className="text-right">
+                    Action
+                  </TableHead>
+                </TableRow>
+              </TableHeader>
 
-                      <p className="text-muted-foreground line-clamp-2">
-                        {booking.service.description}
-                      </p>
-                    </div>
+              <TableBody>
+                {bookings.map(
+                  (booking: BookingDetailsProps) => (
+                    <TableRow key={booking.id}>
+                      <TableCell>
+                        <div className="flex items-center gap-4">
+                          <Image
+                            src={booking.service.thumbnail}
+                            alt={booking.service.title}
+                            width={60}
+                            height={60}
+                            className="h-14 w-14 rounded-md object-cover"
+                          />
 
-                    <Badge>{booking.status}</Badge>
-                  </div>
+                          <div>
+                            <p className="font-semibold">
+                              {booking.service.title}
+                            </p>
+                          </div>
+                        </div>
+                      </TableCell>
 
-                  <div className="flex flex-wrap gap-6 text-sm text-muted-foreground">
-                    <div className="flex items-center gap-2">
-                      <Calendar size={16} />
-                      {new Date(booking.createdAt).toLocaleDateString()}
-                    </div>
+                      <TableCell>
+                        {new Date(
+                          booking.bookingDate
+                        ).toLocaleDateString()}
+                      </TableCell>
 
-                    <div className="flex items-center gap-2">
-                      <Clock size={16} />
-                      {booking.service.estimatedDuration} mins
-                    </div>
-                  </div>
+                      <TableCell>
+                        <Badge
+                          variant="outline"
+                          className={
+                            bookingStatusConfig[
+                              booking.status as keyof typeof bookingStatusConfig
+                            ]?.className
+                          }
+                        >
+                          {
+                            bookingStatusConfig[
+                              booking.status as keyof typeof bookingStatusConfig
+                            ]?.label
+                          }
+                        </Badge>
+                      </TableCell>
 
-                  <div className="font-semibold text-lg">
-                    $ {booking.service.price}
-                  </div>
+                      <TableCell>
+                        <Badge
+                          variant="outline"
+                          className={
+                            paymentStatusConfig[
+                              booking.paymentStatus as keyof typeof paymentStatusConfig
+                            ]?.className
+                          }
+                        >
+                          {booking.paymentStatus}
+                        </Badge>
+                      </TableCell>
 
-                  {booking.note && (
-                    <div className="rounded-md bg-muted p-3">
-                      <p className="text-sm">
-                        <span className="font-semibold">Note:</span>{" "}
-                        {booking.note}
-                      </p>
-                    </div>
-                  )}
+                      <TableCell>
+                        ${booking.service.price}
+                      </TableCell>
 
-                  <div className="flex justify-end">
-                    <Button asChild>
-                      <Link href={`/dashboard/bookings/${booking.id}`}>
-                        View Details
-                      </Link>
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+                      <TableCell>
+                        {booking.service.estimatedDuration} mins
+                      </TableCell>
+
+                      <TableCell className="text-right">
+                        <div className="flex justify-end gap-2">
+                          {/* REQUESTED */}
+                          {booking.status ===
+                            "REQUESTED" && (
+                            <Button
+                              size="sm"
+                              variant="secondary"
+                              disabled
+                            >
+                              Waiting...
+                            </Button>
+                          )}
+
+                          {/* ACCEPTED */}
+                          {booking.status ===
+                            "ACCEPTED" && (
+                            <Button size="sm">
+                              Pay Now
+                            </Button>
+                          )}
+
+                          {/* DECLINED */}
+                          {booking.status ===
+                            "DECLINED" && (
+                            <Button
+                              size="sm"
+                              variant="destructive"
+                              disabled
+                            >
+                              Declined
+                            </Button>
+                          )}
+
+                          {/* PAID */}
+                          {booking.status ===
+                            "PAID" && (
+                            <Button
+                              size="sm"
+                              variant="secondary"
+                              disabled
+                            >
+                              Waiting for Technician
+                            </Button>
+                          )}
+
+                          {/* IN_PROGRESS */}
+                          {booking.status ===
+                            "IN_PROGRESS" && (
+                            <Button
+                              size="sm"
+                              variant="secondary"
+                              disabled
+                            >
+                              In Progress
+                            </Button>
+                          )}
+
+                          {/* COMPLETED */}
+                          {booking.status ===
+                            "COMPLETED" && (
+                            <Button size="sm">
+                              Leave Review
+                            </Button>
+                          )}
+
+                          {/* CANCELLED */}
+                          {booking.status ===
+                            "CANCELLED" && (
+                            <Button
+                              size="sm"
+                              variant="destructive"
+                              disabled
+                            >
+                              Cancelled
+                            </Button>
+                          )}
+
+                          <Button
+                            asChild
+                            size="sm"
+                            variant="outline"
+                          >
+                            <Link
+                              href={`/dashboard/bookings/${booking.id}`}
+                            >
+                              View Details
+                            </Link>
+                          </Button>
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  )
+                )}
+              </TableBody>
+            </Table>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }

@@ -1,14 +1,14 @@
 export interface IService {
-  id: string; 
-  title: string; 
-  description: string; 
-  price: number; 
-  priceType: "FIXED" | "HOURLY"; 
-  estimatedDuration: number; 
-  thumbnail: string; 
-  isAvailable: boolean; 
-  averageRating: number; 
-  totalReviews: number; 
+  id: string;
+  title: string;
+  description: string;
+  price: number;
+  priceType: "FIXED" | "HOURLY";
+  estimatedDuration: number;
+  thumbnail: string;
+  isAvailable: boolean;
+  averageRating: number;
+  totalReviews: number;
 }
 
 
@@ -37,7 +37,10 @@ export interface BookingDetailsProps {
   note: string;
   status: string;
   createdAt: string;
-customerId : string;
+  customerId: string;
+  paymentStatus: string;
+  bookingDate: string;
+  // paymentStatus: REQUESTED | ACCEPTED |DECLINED| PAID| IN_PROGRESS | COMPLETED | CANCELLED;
   service: {
     id: string;
     title: string;
