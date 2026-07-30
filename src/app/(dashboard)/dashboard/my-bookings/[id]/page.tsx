@@ -36,6 +36,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { bookingStatusConfig, paymentStatusConfig } from "../config/bookingStatusConfig";
 import { BookingSlot } from "@/app/(dashboard)/types/bookingSlotProps";
+import { getTechnicianById } from "@/app/(dashboard)/_actions/getTechnicianById";
 
 export default async function SingleBookingPage({
   params,
@@ -45,6 +46,10 @@ export default async function SingleBookingPage({
   const { id } = await params;
 
   const result = await getBookingById(id);
+  console.log(result)
+  
+
+  const technician = await getTechnicianById()
 
   const booking = result?.data;
 
