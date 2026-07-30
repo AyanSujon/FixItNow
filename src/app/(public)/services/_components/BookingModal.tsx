@@ -20,6 +20,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { serviceBooking } from "../_actions/serviceBooking";
+import { toast } from "sonner";
 
 interface BookingSlot {
     id: string;
@@ -48,7 +49,7 @@ export default function BookingModal({
     const handleContinue = async () => {
         if (!selectedSlot) return;
 
-        console.log("Button clicked");
+        // console.log("Button clicked");
 
         try {
             const result = await serviceBooking({
@@ -57,12 +58,17 @@ export default function BookingModal({
                 bookingSlotIds: [selectedSlot],
             });
 
-            console.log("Result:", result);
+            if(result.success){
+                toast.success("booking created successfully.");
+                router.push("/dashboard/booking-success");
+            }
+
+            // console.log("Result:", result);
         } catch (error) {
             console.error("Booking error:", error);
         }
 
-        console.log({ note, selectedSlot, serviceId });
+        // console.log({ note, selectedSlot, serviceId });
     };
 
     return (

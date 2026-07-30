@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 
 
+
 interface ServiceBookingPayload {
   serviceId: string;
   note: string;
@@ -62,7 +63,8 @@ export const serviceBooking = async ({
       throw new Error(result.message || "Booking failed.");
     }
 
-    revalidatePath("/booking");
+    // revalidatePath("/booking");
+   
 
     return {
       success: true,
