@@ -26,7 +26,7 @@ export const getBookingById = async (bookingId: string) => {
 
     const result = await res.json();
 
-    revalidateTag("booking", "max");
+    // revalidateTag("booking", "max");
 
     return result;
   } catch (error) {

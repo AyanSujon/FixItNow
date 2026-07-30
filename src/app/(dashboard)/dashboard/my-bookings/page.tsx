@@ -244,7 +244,7 @@ export default async function MyBookings() {
                             variant="outline"
                           >
                             <Link
-                              href={`/dashboard/bookings/${booking.id}`}
+                              href={`/dashboard/my-bookings/${booking.id}`}
                             >
                               View Details
                             </Link>

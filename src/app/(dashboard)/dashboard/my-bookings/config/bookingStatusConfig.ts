@@ -45,32 +45,6 @@ export const bookingStatusConfig = {
 
 
 
-
-
-
-
-
-// export const paymentStatusConfig = {
-//   PENDING: {
-//     className:
-//       "bg-yellow-100 text-yellow-800 border-yellow-200 hover:bg-yellow-100",
-//   },
-//   PAID: {
-//     className:
-//       "bg-green-100 text-green-800 border-green-200 hover:bg-green-100",
-//   },
-//   FAILED: {
-//     className:
-//       "bg-red-100 text-red-800 border-red-200 hover:bg-red-100",
-//   },
-//   REFUNDED: {
-//     className:
-//       "bg-purple-100 text-purple-800 border-purple-200 hover:bg-purple-100",
-//   },
-// } as const;
-
-
-
 export const paymentStatusConfig = {
   PENDING: {
     label: "Pending",
