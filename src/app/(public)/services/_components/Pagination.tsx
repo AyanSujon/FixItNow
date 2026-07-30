@@ -1,108 +1,84 @@
-"use client";
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import {
-  ChevronLeft,
-  ChevronRight,
-  MoreHorizontal,
-} from "lucide-react";
-
-import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { getAllServicesss } from "../../_actions/getAllServices";
 
 interface PaginationProps {
-  currentPage: number;
-  totalPages: number;
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
-export default function Pagination({
-  currentPage,
-  totalPages,
+export default async function Pagination({
+  searchParams,
 }: PaginationProps) {
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
+  const params = await searchParams;
 
-  const changePage = (page: number) => {
-    const params = new URLSearchParams(searchParams.toString());
+  const page = Number(params?.page) || 1;
 
-    params.set("page", page.toString());
+  const result = await getAllServicesss({ query: params });
 
-    router.push(`${pathname}?${params.toString()}`);
-  };
 
-  const getPages = () => {
-    const pages: (number | "...")[] = [];
+  if (!result.success || !result.meta || result.meta.totalPage <= 1) {
+    return null;
+  }
 
-    if (totalPages <= 7) {
-      for (let i = 1; i <= totalPages; i++) {
-        pages.push(i);
-      }
-
-      return pages;
-    }
-
-    pages.push(1);
-
-    if (currentPage > 3) {
-      pages.push("...");
-    }
-
-    const start = Math.max(2, currentPage - 1);
-    const end = Math.min(totalPages - 1, currentPage + 1);
-
-    for (let i = start; i <= end; i++) {
-      pages.push(i);
-    }
-
-    if (currentPage < totalPages - 2) {
-      pages.push("...");
-    }
-
-    pages.push(totalPages);
-
-    return pages;
-  };
+  const totalPages = result.meta.totalPage;
 
   return (
     <div className="mt-10 flex items-center justify-center gap-2">
-      <Button
-        variant="outline"
-        size="icon"
-        disabled={currentPage === 1}
-        onClick={() => changePage(currentPage - 1)}
+      {/* Previous */}
+      <Link
+        href={{
+          pathname: "/services",
+          query: {
+            ...params,
+            page: Math.max(page - 1, 1),
+          },
+        }}
+        className={`rounded-md border px-4 py-2 text-sm ${
+          page === 1
+            ? "pointer-events-none opacity-50"
+            : "hover:bg-muted"
+        }`}
       >
-        <ChevronLeft className="h-4 w-4" />
-      </Button>
+        Previous
+      </Link>
 
-      {getPages().map((page, index) =>
-        page === "..." ? (
-          <Button
-            key={index}
-            variant="ghost"
-            size="icon"
-            disabled
-          >
-            <MoreHorizontal className="h-4 w-4" />
-          </Button>
-        ) : (
-          <Button
-            key={page}
-            variant={page === currentPage ? "default" : "outline"}
-            onClick={() => changePage(page)}
-          >
-            {page}
-          </Button>
-        )
-      )}
+      {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+        <Link
+          key={p}
+          href={{
+            pathname: "/services",
+            query: {
+              ...params,
+              page: p,
+            },
+          }}
+          className={`rounded-md border px-4 py-2 text-sm ${
+            page === p
+              ? "bg-primary text-primary-foreground"
+              : "hover:bg-muted"
+          }`}
+        >
+          {p}
+        </Link>
+      ))}
 
-      <Button
-        variant="outline"
-        size="icon"
-        disabled={currentPage === totalPages}
-        onClick={() => changePage(currentPage + 1)}
+      {/* Next */}
+      <Link
+        href={{
+          pathname: "/services",
+          query: {
+            ...params,
+            page: Math.min(page + 1, totalPages),
+          },
+        }}
+        className={`rounded-md border px-4 py-2 text-sm ${
+          page === totalPages
+            ? "pointer-events-none opacity-50"
+            : "hover:bg-muted"
+        }`}
       >
-        <ChevronRight className="h-4 w-4" />
-      </Button>
+        Next
+      </Link>
     </div>
   );
 }
