@@ -33,6 +33,7 @@ import { ServicesList } from "./_components/ServicesList";
 import ServicesSearchBar from "./_components/ServicesSearchBar";
 import Pagination from "./_components/Pagination";
 
+
 const Services = async ({
   searchParams,
 }: {
@@ -50,7 +51,6 @@ const Services = async ({
 
         <ServicesSearchBar />
       </div>
-
       <Suspense fallback={<ServicesSkeleton />}>
         <ServicesList searchParams={searchParams} />
         <Pagination searchParams={searchParams} />

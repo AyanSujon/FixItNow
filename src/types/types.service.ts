@@ -1,12 +1,31 @@
 export interface IService {
+  id: string; 
+  title: string; 
+  description: string; 
+  price: number; 
+  priceType: "FIXED" | "HOURLY"; 
+  estimatedDuration: number; 
+  thumbnail: string; 
+  isAvailable: boolean; 
+  averageRating: number; 
+  totalReviews: number; 
+}
+
+
+
+export interface IBookingSlot {
   id: string;
-  title: string;
-  description: string;
-  price: number;
-  priceType: "FIXED" | "HOURLY";
-  estimatedDuration: number;
-  thumbnail: string;
+  serviceId: string;
+  date: string;
+  startsAt: string;
+  endsAt: string;
   isAvailable: boolean;
-  averageRating: number;
-  totalReviews: number;
+  isBooked: boolean;
+  bookingId: string | null;
+  note: string;
+  bookingDeadline: string;
+  maxBookings: number;
+  bookedCount: number;
+  createdAt: string;
+  updatedAt: string;
 }
