@@ -37,6 +37,7 @@ import {
   XCircle,
 } from "lucide-react";
 import { IBookingSlot } from "@/types/types.service";
+import BookingModal from "../_components/BookingModal";
 
 const SingleServiceByIdPage = async ({
   params,
@@ -132,8 +133,8 @@ const SingleServiceByIdPage = async ({
                   <div
                     key={slot.id}
                     className={`rounded-xl border p-4 ${slot.isAvailable
-                        ? "border-green-300 bg-green-50"
-                        : "border-red-200 bg-red-50"
+                      ? "border-green-300 bg-green-50"
+                      : "border-red-200 bg-red-50"
                       }`}
                   >
                     <div className="mb-3 flex items-center gap-2 font-semibold">
@@ -234,13 +235,20 @@ const SingleServiceByIdPage = async ({
                 </div>
               </div>
 
-              <Button
+              {/* <Button
                 className="w-full"
                 size="lg"
                 disabled={!data.isAvailable}
               >
                 Book This Service
-              </Button>
+              </Button> */}
+
+              <BookingModal
+                serviceId={data.id}
+                slots={data.bookingSlots.filter(
+                  (slot: IBookingSlot) => slot.isAvailable
+                )}
+              />
             </CardContent>
           </Card>
         </div>
