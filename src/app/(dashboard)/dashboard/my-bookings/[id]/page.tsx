@@ -35,6 +35,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { bookingStatusConfig, paymentStatusConfig } from "../config/bookingStatusConfig";
+import { BookingSlot } from "@/app/(dashboard)/types/bookingSlotProps";
 
 export default async function SingleBookingPage({
   params,
@@ -175,13 +176,13 @@ export default async function SingleBookingPage({
 
               <div className="space-y-2">
                 {booking.bookingSlots.length > 0 ? (
-                  booking.bookingSlots.map((slot: any) => (
+                  booking.bookingSlots.map((slot: BookingSlot) => (
                     <Badge
                       key={slot.id}
                       variant="secondary"
                       className="mr-2"
                     >
-                      {slot.startTime} - {slot.endTime}
+                      {slot.startsAt} - {slot.endsAt}
                     </Badge>
                   ))
                 ) : (
