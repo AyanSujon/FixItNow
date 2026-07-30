@@ -29,3 +29,21 @@ export interface IBookingSlot {
   createdAt: string;
   updatedAt: string;
 }
+
+
+
+export interface BookingDetailsProps {
+  id: string;
+  note: string;
+  status: string;
+  createdAt: string;
+
+  service: {
+    id: string;
+    title: string;
+    description: string;
+    thumbnail: string;
+    price: number;
+    estimatedDuration: number;
+  };
+}
