@@ -12,7 +12,7 @@ import {
 export const navigation = {
   customer: [
     { name: "Dashboard", href: "/dashboard", icon: Home },
-    { name: "Browse Services", href: "/dashboard/services", icon: Wrench },
+    { name: "My Payments", href: "/dashboard/my-payments", icon: Wrench },
     { name: "My Bookings", href: "/dashboard/my-bookings", icon: Calendar },
     { name: "My Reviews", href: "/dashboard/reviews", icon: Star },
     { name: "Profile", href: "/dashboard/profile", icon: User },
