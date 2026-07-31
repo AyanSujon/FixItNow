@@ -27,7 +27,7 @@ import { getAllBookings } from "../../_actions/getAllBookings";
 import { getMe } from "@/services/getMe";
 import { BookingDetailsProps } from "@/types/types.service";
 import { bookingStatusConfig, paymentStatusConfig } from "./config/bookingStatusConfig";
-import { CreditCard } from "lucide-react";
+
 
 export default async function MyBookings() {
   const result = await getAllBookings();
@@ -176,7 +176,7 @@ export default async function MyBookings() {
                             )}
 
                           {/* ACCEPTED */}
-                          {booking.status ===
+                          {/* {booking.status ===
                             "ACCEPTED" && (
                               <Button size="sm">
                                 <Link
@@ -186,7 +186,28 @@ export default async function MyBookings() {
                                 </Link>
 
                               </Button>
-                            )}
+                            )} */}
+
+                          {/* ACCEPTED */}
+                          {booking.status === "ACCEPTED" && (
+                            booking.paymentStatus === "CANCELLED" ? (
+                              <Button
+                                size="sm"
+                                variant="secondary"
+                                disabled
+                              >
+                                Payment Completed
+                              </Button>
+                            ) : (
+                              <Button size="sm" asChild>
+                                <Link
+                                  href={`/dashboard/my-bookings/${booking.id}/payment`}
+                                >
+                                  Pay Now
+                                </Link>
+                              </Button>
+                            )
+                          )}
 
                           {/* DECLINED */}
                           {booking.status ===
