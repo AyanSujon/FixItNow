@@ -9,9 +9,9 @@ export const getTechnicianById = async (technicianId: string) => {
     const cookieStore = await cookies();
 
     const accessToken = cookieStore.get("accessToken")?.value;
-
+// http://localhost:5000/api/technicians/b2365bc4-5a38-458a-b87b-505e570ceba4/profile
     const res = await fetch(
-      `${API_URL}/api/technicians/${technicianId}`,
+      `${API_URL}/api/technicians/${technicianId}/profile`,
       {
         method: "GET",
         headers: {

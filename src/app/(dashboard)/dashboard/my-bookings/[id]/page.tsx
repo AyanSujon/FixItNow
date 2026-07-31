@@ -46,12 +46,19 @@ export default async function SingleBookingPage({
   const { id } = await params;
 
   const result = await getBookingById(id);
-  console.log(result)
+  // console.log(result)
   
+const technicianProfileId = result.data.technicianId;
 
-  const technician = await getTechnicianById()
+// console.log(technicianProfileId);
+  const technicianProfile = await getTechnicianById(technicianProfileId)
+
+
+console.log(technicianProfile.data?.technician?.user)
+const technician = technicianProfile.data?.technician?.user
 
   const booking = result?.data;
+
 
   if (!booking) {
     return (
@@ -220,12 +227,18 @@ export default async function SingleBookingPage({
 
             <div>
               <h3 className="text-lg font-semibold">
-                {booking.technician.user?.name ??
+                {technician?.name ??
                   "Assigned Technician"}
               </h3>
 
               <p className="text-muted-foreground">
                 {booking.technician.bio}
+              </p>
+              <p className="text-muted-foreground">
+                Mobile: {technician?.phone}
+              </p>
+              <p className="text-muted-foreground">
+                Email: {technician?.email}
               </p>
             </div>
 
