@@ -249,7 +249,12 @@ export default async function MyBookings() {
                           {booking.status ===
                             "COMPLETED" && (
                               <Button size="sm">
-                                Leave Review
+                               
+                                <Link
+                                 href={`/dashboard/my-bookings/${booking.id}/leave-review`}
+                                >
+                                  Leave Review
+                                </Link>
                               </Button>
                             )}
 
