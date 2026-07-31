@@ -4,26 +4,48 @@ import { cookies } from "next/headers";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
+// export interface Review {
+//   id: string;
+//   rating: number;
+//   comment: string;
+//   createdAt: string;
+
+//   technician: {
+//     id: string;
+//     name: string;
+//     profilePhoto: string | null;
+//   };
+
+//   booking: {
+//     id: string;
+//     service: {
+//       id: string;
+//       title: string;
+//     };
+//   };
+// }
+
 export interface Review {
   id: string;
+  customerId: string;
+  technicianId: string;
+  bookingId: string;
   rating: number;
   comment: string;
+  title: string;
   createdAt: string;
-
+  updatedAt: string;
   technician: {
     id: string;
-    name: string;
-    profilePhoto: string | null;
-  };
-
-  booking: {
-    id: string;
-    service: {
-      id: string;
-      title: string;
+    profilePhoto: string;
+    user: {
+      name: string;
+      email: string;
+      phone: string;
     };
   };
 }
+
 
 interface ApiResponse {
   success: boolean;

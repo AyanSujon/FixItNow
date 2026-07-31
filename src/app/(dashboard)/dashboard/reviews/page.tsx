@@ -270,10 +270,12 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
 import { Eye, Star } from "lucide-react";
-import { getAllReviews } from "../../_actions/getAllReviews";
+import { getAllReviews, Review } from "../../_actions/getAllReviews";
+
+
 
 export default async function ReviewsPage() {
-  const reviews = await getAllReviews();
+  const reviews: Review[] = await getAllReviews();
 
   return (
     <div className="container mx-auto py-8">
