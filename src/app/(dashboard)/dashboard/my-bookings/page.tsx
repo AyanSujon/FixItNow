@@ -27,6 +27,7 @@ import { getAllBookings } from "../../_actions/getAllBookings";
 import { getMe } from "@/services/getMe";
 import { BookingDetailsProps } from "@/types/types.service";
 import { bookingStatusConfig, paymentStatusConfig } from "./config/bookingStatusConfig";
+import { CreditCard } from "lucide-react";
 
 export default async function MyBookings() {
   const result = await getAllBookings();
@@ -165,78 +166,83 @@ export default async function MyBookings() {
                           {/* REQUESTED */}
                           {booking.status ===
                             "REQUESTED" && (
-                            <Button
-                              size="sm"
-                              variant="secondary"
-                              disabled
-                            >
-                              Waiting...
-                            </Button>
-                          )}
+                              <Button
+                                size="sm"
+                                variant="secondary"
+                                disabled
+                              >
+                                Waiting...
+                              </Button>
+                            )}
 
                           {/* ACCEPTED */}
                           {booking.status ===
                             "ACCEPTED" && (
-                            <Button size="sm">
-                              Pay Now
-                            </Button>
-                          )}
+                              <Button size="sm">
+                                <Link
+                                  href={`/dashboard/my-bookings/${booking.id}/payment`}
+                                >
+                                  Pay Now
+                                </Link>
+
+                              </Button>
+                            )}
 
                           {/* DECLINED */}
                           {booking.status ===
                             "DECLINED" && (
-                            <Button
-                              size="sm"
-                              variant="destructive"
-                              disabled
-                            >
-                              Declined
-                            </Button>
-                          )}
+                              <Button
+                                size="sm"
+                                variant="destructive"
+                                disabled
+                              >
+                                Declined
+                              </Button>
+                            )}
 
                           {/* PAID */}
                           {booking.status ===
                             "PAID" && (
-                            <Button
-                              size="sm"
-                              variant="secondary"
-                              disabled
-                            >
-                              Waiting for Technician
-                            </Button>
-                          )}
+                              <Button
+                                size="sm"
+                                variant="secondary"
+                                disabled
+                              >
+                                Waiting for Technician
+                              </Button>
+                            )}
 
                           {/* IN_PROGRESS */}
                           {booking.status ===
                             "IN_PROGRESS" && (
-                            <Button
-                              size="sm"
-                              variant="secondary"
-                              disabled
-                            >
-                              In Progress
-                            </Button>
-                          )}
+                              <Button
+                                size="sm"
+                                variant="secondary"
+                                disabled
+                              >
+                                In Progress
+                              </Button>
+                            )}
 
                           {/* COMPLETED */}
                           {booking.status ===
                             "COMPLETED" && (
-                            <Button size="sm">
-                              Leave Review
-                            </Button>
-                          )}
+                              <Button size="sm">
+                                Leave Review
+                              </Button>
+                            )}
 
                           {/* CANCELLED */}
                           {booking.status ===
                             "CANCELLED" && (
-                            <Button
-                              size="sm"
-                              variant="destructive"
-                              disabled
-                            >
-                              Cancelled
-                            </Button>
-                          )}
+                              <Button
+                                size="sm"
+                                variant="destructive"
+                                disabled
+                              >
+                                Cancelled
+                              </Button>
+                            )}
 
                           <Button
                             asChild

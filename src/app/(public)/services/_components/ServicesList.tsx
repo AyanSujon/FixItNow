@@ -11,7 +11,7 @@ export async function ServicesList({
 }) {
   const query = await searchParams;
   const result = await getAllServicesss({ query });
-console.log(result)
+// console.log(result)
   if (!result.success || !result.data?.length) {
     return (
       <p className="py-12 text-center text-muted-foreground">
