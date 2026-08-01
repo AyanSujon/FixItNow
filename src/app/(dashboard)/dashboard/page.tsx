@@ -63,7 +63,7 @@ const stats = [
 ];
 
 export default function CustomerDashboardHome() {
-  const today = TodayDate();
+
 
   return (
     <div className="space-y-8">
@@ -78,7 +78,7 @@ export default function CustomerDashboardHome() {
           </h1>
 
           <p className="mt-1 text-muted-foreground">
-            {today}
+            <TodayDate />
           </p>
         </div>
 
