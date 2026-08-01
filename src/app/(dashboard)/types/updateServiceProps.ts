@@ -1,4 +1,4 @@
-export interface IEditService {
+export interface UpdateServiceProps {
   serviceId: string;
   categoryId?: string;
   title?: string;

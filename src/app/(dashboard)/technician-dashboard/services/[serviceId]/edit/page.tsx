@@ -72,7 +72,7 @@
 
 
 
-import { getServiceById, IServiceDetails } from "@/app/(dashboard)/_actions/getServiceById";
+import { getServiceById } from "@/app/(dashboard)/_actions/getServiceById";
 import UpdateServiceForm from "@/app/(dashboard)/_components/UpdateServiceForm";
 import { getAllCategories } from "@/app/(public)/_actions/getAllCategories";
 

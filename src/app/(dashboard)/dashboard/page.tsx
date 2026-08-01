@@ -21,6 +21,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import TodayDate from "../_components/TodayDate";
 
 const stats = [
   {
@@ -62,12 +63,7 @@ const stats = [
 ];
 
 export default function CustomerDashboardHome() {
-  const today = new Date().toLocaleDateString("en-US", {
-    weekday: "long",
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-  });
+  const today = TodayDate();
 
   return (
     <div className="space-y-8">
