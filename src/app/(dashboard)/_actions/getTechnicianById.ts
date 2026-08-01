@@ -9,7 +9,7 @@ export const getTechnicianById = async (technicianId: string) => {
     const cookieStore = await cookies();
 
     const accessToken = cookieStore.get("accessToken")?.value;
-// http://localhost:5000/api/technicians/b2365bc4-5a38-458a-b87b-505e570ceba4/profile
+// http://localhost:5000/api/technicians/fc4c2eb1-5ea3-4113-bad1-ce2164aa75ae/profile
     const res = await fetch(
       `${API_URL}/api/technicians/${technicianId}/profile`,
       {
