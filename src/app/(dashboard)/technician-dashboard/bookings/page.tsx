@@ -142,32 +142,6 @@
 
 
 
-// 'use client'
-
-// import { acceptBooking } from './actions' // adjust path
-
-// export default function AcceptButton() {
-//   return (
-//     <button
-//       onClick={async () => {
-//         try {
-//           const data = await acceptBooking()
-//           console.log('Updated:', data)
-//         } catch (err) {
-//           console.error(err)
-//         }
-//       }}
-//     >
-//       Accept Booking
-//     </button>
-//   )
-// }
-
-
-
-
-
-
 
 
 
@@ -221,6 +195,7 @@ import {
   Eye,
   User,
 } from "lucide-react";
+import UpdateBookingStatusByTechnician from "../../_components/updateBookingStatusByTechnician";
 
 export type BookingStatus =
   | "REQUESTED"
@@ -466,8 +441,18 @@ export default async function TechnicianBookingsPage() {
                       </div>
                     </TableCell>
 
+                    {/* <TableCell>
+                      <Badge>
+                        {booking.status}
+                      </Badge>
+                    </TableCell> */}
+
+
                     <TableCell>
-                      <Badge>{booking.status}</Badge>
+                      <UpdateBookingStatusByTechnician
+                        bookingId={booking.id}
+                        currentStatus={booking.status}
+                      />
                     </TableCell>
 
                     <TableCell>
