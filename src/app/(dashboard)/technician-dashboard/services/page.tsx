@@ -94,6 +94,7 @@ import {
   CalendarDays,
   Trash2,
 } from "lucide-react";
+import DeleteServiceButton from "../../_components/DeleteServiceButton";
 
 
 
@@ -364,12 +365,22 @@ export default async function TechnicianServicesPage() {
                           </Link>
                         </Button>
 
-                        <Button
+                        {/* <Button
                           variant="destructive"
                           size="icon"
                         >
-                          <Trash2 className="h-4 w-4" />
-                        </Button>
+                          <Link
+                            href={`/technician-dashboard/services/${service.id}/delete`}
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </Link>
+                        </Button> */}
+
+                        <div>
+                          <DeleteServiceButton
+                            serviceId={service.id}
+                          />
+                        </div>
                       </div>
                     </TableCell>
                   </TableRow>
