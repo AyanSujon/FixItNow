@@ -98,6 +98,5 @@ export async function updateBookingStatus(
   if (!res.ok) {
     throw new Error(result.message || "Failed to update booking.");
   }
-
   return result;
 }
