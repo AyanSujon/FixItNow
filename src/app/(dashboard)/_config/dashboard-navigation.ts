@@ -24,7 +24,7 @@ export const navigation = {
     { name: "Availability", href: "/technician-dashboard/availability", icon: Calendar },
     { name: "Bookings", href: "/technician-dashboard/bookings", icon: Calendar },
     { name: "Earnings", href: "/technician-dashboard/earnings", icon: BarChart3 },
-    { name: "Reviews", href: "/technician-dashboard/reviews", icon: Star },
+    // { name: "Reviews", href: "/technician-dashboard/reviews", icon: Star },
     { name: "Profile", href: "/technician-dashboard/profile", icon: User },
   ],
 
