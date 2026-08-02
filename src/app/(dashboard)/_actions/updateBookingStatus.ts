@@ -81,7 +81,7 @@ export async function updateBookingStatus(
   const token = (await cookies()).get("accessToken")?.value;
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/bookings/${bookingId}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/api/bookings/${bookingId}`,
     {
       method: "PATCH",
       headers: {
