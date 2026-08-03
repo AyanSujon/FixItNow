@@ -76,6 +76,13 @@ export default function Navbar({ user }: NavbarProps) {
 const profile = user?.data?.profile;
 const isLoggedIn = !!user?.success && !!profile;
 
+const dashboardLink =
+  profile?.role === "ADMIN"
+    ? "/admin-dashboard"
+    : profile?.role === "TECHNICIAN"
+    ? "/technician-dashboard"
+    : "/dashboard";
+
   const handleLogout = async () => {
   try {
     toast.loading("Logging out...", { id: "logout" });
@@ -160,7 +167,7 @@ const isLoggedIn = !!user?.success && !!profile;
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem asChild>
-                    <Link href="/dashboard" className="cursor-pointer">
+                    <Link href={dashboardLink} className="cursor-pointer">
                       <LayoutDashboard className="mr-2 h-4 w-4" />
                       Dashboard
                     </Link>

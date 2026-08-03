@@ -73,7 +73,7 @@ export default function UpdateBookingStatusByTechnician({
 }: Props) {
   const handleStatusChange = async (status: BookingStatus) => {
 
-    console.log(bookingId, status);
+    // console.log(bookingId, status);
     try {
       await updateBookingStatus(bookingId, { status });
 

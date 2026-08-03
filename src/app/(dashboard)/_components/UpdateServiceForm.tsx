@@ -425,7 +425,7 @@ export default function UpdateServiceForm({
           payload
         );
 
-        console.log(result);
+        // console.log(result);
 
         toast.success("Service updated successfully");
 
