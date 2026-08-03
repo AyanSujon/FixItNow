@@ -15,16 +15,18 @@ export default async function TechnicianDetailsPage({
 }: TechnicianDetailsPageProps) {
   const { id } = await params;
 
-  const technician = await getTechnicianById(id);
-
-  const profile = technician.data;
-  console.log(profile, "technician:________________")
+  const result = await getTechnicianById(id);
+  const technicianContact = result.data.technician;
+  const technicianProfile = result.data.technician.technicianProfile;
+  console.log(technicianContact, technicianProfile, "technician:________________")
 
   return (
     <div>
-      {/* <h1>{technician.data.technician.name}</h1> */}
-      {/* <p>{profile.profession}</p>
-      <p>{profile.bio}</p> */}
+         
+      <h1>{technicianContact.name}</h1>
+      <h1>{technicianContact.email}</h1>
+
+
     </div>
   );
 }
