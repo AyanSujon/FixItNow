@@ -127,7 +127,7 @@ npm start
 ---
 
 ## API Integration Matrix
-The application consumes backend endpoints via Next.js Server Actions and core services. Detailed components mapping can be found in the standalone [API_INTEGRATION.md](FixItNow/API_INTEGRATION.md) file.
+The application consumes backend endpoints via Next.js Server Actions and core services. Detailed components mapping can be found in the standalone [API_INTEGRATION.md](https://github.com/AyanSujon/FixItNow/blob/main/API_INTEGRATION.md) file.
 
 ---
 
