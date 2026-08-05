@@ -50,7 +50,7 @@ The primary objective of FixItNow is to streamline the fragmented home-services 
 
 ## Project Credentials
 
-*   **Live Project:** [https://fixitnow-client.vercel.app](https://fixitnow-client.vercel.app) *(Suggested Link / Placeholder)*
+*   **Live Project:** [https://fix-it-now-chi-beige.vercel.app](https://fix-it-now-chi-beige.vercel.app) *(Suggested Link / Placeholder)*
 *   **Live API:** [https://fixitnow-api-liart.vercel.app](https://fixitnow-api-liart.vercel.app)
 *   **Backend Repo:** [https://github.com/AyanSujon/FixItNow-Server-Side](https://github.com/AyanSujon/FixItNow-Server-Side)
 *   **Frontend Repo:** [https://github.com/AyanSujon/FixItNow](https://github.com/AyanSujon/FixItNow)
@@ -127,7 +127,7 @@ npm start
 ---
 
 ## API Integration Matrix
-The application consumes backend endpoints via Next.js Server Actions and core services. Detailed components mapping can be found in the standalone [API_INTEGRATION.md](file:///e:/Programming%20Hero/Next%20Level/FixItNow/API_INTEGRATION.md) file.
+The application consumes backend endpoints via Next.js Server Actions and core services. Detailed components mapping can be found in the standalone [API_INTEGRATION.md](FixItNow/API_INTEGRATION.md) file.
 
 ---
 
