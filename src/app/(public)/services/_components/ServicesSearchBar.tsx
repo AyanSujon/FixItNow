@@ -19,7 +19,6 @@ export default function ServicesSearchBar() {
             clearTimeout(debouncedReference.current)
         }
 
-
         debouncedReference.current = setTimeout(() =>{
             // console.log(value);
 

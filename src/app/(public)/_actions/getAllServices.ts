@@ -1,122 +1,27 @@
-// export async function getAllServices() {
-//   try {
-//     const res = await fetch(
-//       `${process.env.NEXT_PUBLIC_API_URL}/api/services`,
-//       {
-//         method: "GET",
-//         cache: "no-store",
-//       }
-//     );
 
-//     if (!res.ok) {
-//       throw new Error("Failed to fetch services");
+
+// "use server"
+// export const getAllServicesss = async ({query } : { query?: { [key: string]: string | string[] | undefined } }) => {
+
+//     const params = new URLSearchParams()
+
+//     if(query && query.searchTerm){
+//         params.set("searchTerm", query.searchTerm as string)
 //     }
 
-//     const data = await res.json();
 
-//     return {
-//       success: true,
-//       data: data.data,
-//     };
-//   } catch (error) {
-//     console.error("Error fetching services:", error);
+//     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/services?${params.toString()}`, {
 
-//     return {
-//       success: false,
-//       data: [],
-//       message: "Unable to fetch services.",
-//     };
-//   }
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// interface GetAllServicesParams {
-//   page?: number;
-//   limit?: number;
-//   categoryId?: string;
-//   city?: string;
-//   district?: string;
-//   address?: string;
-//   minRating?: number;
-// }
-
-// export async function getAllServices(
-//   params: GetAllServicesParams = {}
-// ) {
-//   try {
-//     const searchParams = new URLSearchParams();
-
-//     if (params.page) {
-//       searchParams.set("page", params.page.toString());
-//     }
-
-//     if (params.limit) {
-//       searchParams.set("limit", params.limit.toString());
-//     }
-
-//     if (params.categoryId) {
-//       searchParams.set("categoryId", params.categoryId);
-//     }
-
-//     if (params.city) {
-//       searchParams.set("city", params.city);
-//     }
-
-//     if (params.district) {
-//       searchParams.set("district", params.district);
-//     }
-
-//     if (params.address) {
-//       searchParams.set("address", params.address);
-//     }
-
-//     if (params.minRating) {
-//       searchParams.set("minRating", params.minRating.toString());
-//     }
-
-//     const url = `${process.env.NEXT_PUBLIC_API_URL}/api/services?${searchParams.toString()}`;
-
-//     const res = await fetch(url, {
-//       method: "GET",
-//       cache: "no-store",
+//         cache : "no-cache",
+//         next : {
+//             revalidate : 60 * 60 * 6,
+//             tags : ["premium-posts"]
+//         }
 //     });
 
-//     if (!res.ok) {
-//       throw new Error("Failed to fetch services");
-//     }
+//     const result = await res.json();
 
-//     const data = await res.json();
-
-//     return {
-//       success: true,
-//       data: data.data,
-//       meta: data.meta,
-//     };
-//   } catch (error) {
-//     console.error("Error fetching services:", error);
-
-//     return {
-//       success: false,
-//       data: [],
-//       meta: null,
-//       message: "Unable to fetch services.",
-//     };
-//   }
+//     return result;
 // }
 
 
@@ -141,27 +46,78 @@
 
 
 
+"use server";
 
-"use server"
-export const getAllServicesss = async ({query } : { query?: { [key: string]: string | string[] | undefined } }) => {
+export const getAllServicesss = async ({
+  query,
+}: {
+  query?: {
+    [key: string]: string | string[] | undefined;
+  };
+}) => {
+  const params = new URLSearchParams();
 
-    const params = new URLSearchParams()
-
-    if(query && query.searchTerm){
-        params.set("searchTerm", query.searchTerm as string)
+  const getValue = (value: string | string[] | undefined) => {
+    if (Array.isArray(value)) {
+      return value[0];
     }
 
+    return value;
+  };
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/services?${params.toString()}`, {
+  const searchTerm = getValue(query?.searchTerm);
+  const categoryId = getValue(query?.categoryId);
+  const city = getValue(query?.city);
+  const district = getValue(query?.district);
+  const address = getValue(query?.address);
+  const minRating = getValue(query?.minRating);
+  const page = getValue(query?.page);
+  const limit = getValue(query?.limit);
 
-        cache : "no-cache",
-        next : {
-            revalidate : 60 * 60 * 6,
-            tags : ["premium-posts"]
-        }
-    });
+  if (searchTerm) {
+    params.set("searchTerm", searchTerm);
+  }
 
-    const result = await res.json();
+  if (categoryId) {
+    params.set("categoryId", categoryId);
+  }
 
-    return result;
-}
+  if (city) {
+    params.set("city", city);
+  }
+
+  if (district) {
+    params.set("district", district);
+  }
+
+  if (address) {
+    params.set("address", address);
+  }
+
+  if (minRating) {
+    params.set("minRating", minRating);
+  }
+
+  if (page) {
+    params.set("page", page);
+  }
+
+  if (limit) {
+    params.set("limit", limit);
+  }
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/services?${params.toString()}`,
+    {
+      cache: "no-store",
+    }
+  );
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch services");
+  }
+
+  const result = await res.json();
+
+  return result;
+};
