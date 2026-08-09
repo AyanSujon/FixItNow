@@ -12,7 +12,6 @@ import {
   companyLinks,
   socialLinks,
   supportLinks,
-  technicianLinks,
 } from "./footerLinks";
 
 import { Button } from "@/components/ui/button";
@@ -152,26 +151,6 @@ export default function Footer() {
                 <Send className="mr-2 h-4 w-4" />
                 Subscribe
               </Button>
-            </div>
-
-            {/* Technician Links */}
-
-            <div className="mt-8">
-              <h4 className="mb-4 font-semibold">
-                For Technicians
-              </h4>
-
-              <div className="space-y-3">
-                {technicianLinks.map((link) => (
-                  <Link
-                    key={link.label}
-                    href={link.href}
-                    className="block text-sm text-muted-foreground transition hover:text-primary"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-              </div>
             </div>
           </div>
         </div>
