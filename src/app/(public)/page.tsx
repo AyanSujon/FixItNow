@@ -11,6 +11,7 @@ import PlatformStatistics from "./_components/PlatformStatistics";
 import BecomeTechnician from "./_components/BecomeTechnician";
 import FAQSection from "./_components/FAQSection";
 import FinalCTA from "./_components/FinalCTA";
+import HeroCarousel from "./_components/HeroCarousel";
 
 export default  async function Home() {
 
@@ -19,7 +20,8 @@ export default  async function Home() {
 
   return (
 <div>
-  <Hero/>
+  {/* <Hero/> */}
+  <HeroCarousel/>
   <PopularIndustries/>
   <HowItWorks/>
   <FeaturedServices/>
