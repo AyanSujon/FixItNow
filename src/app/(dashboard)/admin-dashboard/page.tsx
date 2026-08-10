@@ -31,6 +31,8 @@ import {
 } from "lucide-react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import BookingStatusChart from "../_components/BookingStatusChart";
+import RevenueLineChart from "../_components/RevenueLineChart";
 
 export default function AdminDashboardHome() {
   return (
@@ -102,25 +104,11 @@ export default function AdminDashboardHome() {
       {/* ================= Charts ================= */}
 
       <div className="grid gap-6 lg:grid-cols-2">
-        <Card className="h-[360px]">
-          <CardHeader>
-            <CardTitle>Booking Status Overview</CardTitle>
-          </CardHeader>
+        {/*  Booking Status Pie Chart */}
+        <BookingStatusChart />
+        {/* Revenue Line Chart */}
+        <RevenueLineChart />
 
-          <CardContent className="flex h-full items-center justify-center text-muted-foreground">
-            Booking Status Pie Chart
-          </CardContent>
-        </Card>
-
-        <Card className="h-[360px]">
-          <CardHeader>
-            <CardTitle>Monthly Revenue</CardTitle>
-          </CardHeader>
-
-          <CardContent className="flex h-full items-center justify-center text-muted-foreground">
-            Revenue Line Chart
-          </CardContent>
-        </Card>
       </div>
 
       {/* ================= Recent Data ================= */}

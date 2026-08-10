@@ -89,14 +89,6 @@ export default function SidebarContent({
           Help / Support
         </Link>
 
-        <Link
-          href="/dashboard/reports"
-          onClick={onClose}
-          className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
-        >
-          <TriangleAlert className="h-5 w-5" />
-          Reports
-        </Link>
       </ScrollArea>
 
       <div className="border-t p-4">
