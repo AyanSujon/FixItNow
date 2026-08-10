@@ -102,8 +102,8 @@ export default async function MyBookings() {
                       <TableCell>
                         <div className="flex items-center gap-4">
                           <Image
-                            src={booking.service.thumbnail}
-                            alt={booking.service.title}
+                            src={booking.service?.thumbnail}
+                            alt={booking.service?.title }
                             width={60}
                             height={60}
                             className="h-14 w-14 rounded-md object-cover"
@@ -111,7 +111,7 @@ export default async function MyBookings() {
 
                           <div>
                             <p className="font-semibold">
-                              {booking.service.title}
+                              {booking.service?.title || "Service title"}
                             </p>
                           </div>
                         </div>
@@ -154,11 +154,11 @@ export default async function MyBookings() {
                       </TableCell>
 
                       <TableCell>
-                        ${booking.service.price}
+                        ${booking.service?.price || 0}
                       </TableCell>
 
                       <TableCell>
-                        {booking.service.estimatedDuration} mins
+                        {booking.service?.estimatedDuration} mins
                       </TableCell>
 
                       <TableCell className="text-right">
@@ -294,6 +294,16 @@ export default async function MyBookings() {
     </div>
   );
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
