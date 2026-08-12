@@ -210,7 +210,7 @@
 
 "use client";
 
-import {  useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { Eye, EyeOff } from "lucide-react";
 import { useForm } from "react-hook-form";
@@ -231,9 +231,14 @@ import { Label } from "@/components/ui/label";
 import { loginUser } from "../_actions/loginUser";
 import { loginSchema, LoginFormData } from "@/schemas/login.schema";
 import DemoCredentials from "../_components/DemoCredentials";
+import { GoogleLoginButton } from "../_components/GoogleLoginButton";
+// import GoogleLoginButton from "../_components/GoogleLoginButton";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
+
+  // const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID ?? "";
+
   const {
     register,
     handleSubmit,
@@ -350,6 +355,7 @@ export default function Login() {
                   </p>
                 )}
               </div>
+
               {/* Submit Button */}
               <Button
                 type="submit"
@@ -361,8 +367,29 @@ export default function Login() {
                   ? "Logging in..."
                   : "Login"}
               </Button>
+
+              {/* Google Login component */}
+              <div>
+                <div className="relative">
+                  <div className="absolute inset-0 flex items-center">
+                    <span className="w-full border-t" />
+                  </div>
+
+                  <div className="relative flex justify-center text-xs uppercase">
+                    <span className="bg-background px-2 text-muted-foreground">
+                      Or continue with
+                    </span>
+                  </div>
+                </div>
+
+                {/* Google Login */}
+                <div className="w-full">
+                  <GoogleLoginButton />
+                </div>
+              </div>
               <DemoCredentials setValue={setValue} />
             </form>
+
           </CardContent>
           <CardFooter className="justify-center">
             <p className="text-muted-foreground text-sm">
