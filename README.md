@@ -50,8 +50,8 @@ The primary objective of FixItNow is to streamline the fragmented home-services 
 
 ## Project Credentials
 
-*   **Live Project:** [https://fix-it-now-chi-beige.vercel.app](https://fix-it-now-chi-beige.vercel.app)
-*   **Live API:** [https://fixitnow-api-liart.vercel.app](https://fixitnow-api-liart.vercel.app)
+*   **Live Project:** [https://fixitnow-v1.vercel.app](https://fixitnow-v1.vercel.app)
+*   **Live API:** [https://fixitnow-api-v1.vercel.app](https://fixitnow-api-v1.vercel.app)
 *   **Backend Repo:** [https://github.com/AyanSujon/FixItNow-Server-Side](https://github.com/AyanSujon/FixItNow-Server-Side)
 *   **Frontend Repo:** [https://github.com/AyanSujon/FixItNow](https://github.com/AyanSujon/FixItNow)
 
